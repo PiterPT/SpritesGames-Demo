@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="pt-PT">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Guardião das Runas — Animação por Imagens</title>
+    <!-- Fontes modernas do Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800&family=JetBrains+Mono:wght@500;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="styles/styles.css">
+</head>
+<body>
+
+<div id="game-container">
+    <canvas id="gameCanvas"></canvas>
+
+    <!-- HUD Superior Esquerdo: Estado Atual & Telemetria -->
+    <div id="hud-status" class="hud-panel">
+        <div class="hud-title">
+            <span>Estado da Animação</span>
+            <span id="score-display" style="color: #fbbf24;">Alvos: 0</span>
+        </div>
+        <div id="state-badge" class="state-badge idle">
+            <span class="state-dot"></span>
+            <span id="state-text">PARADO (Idle)</span>
+        </div>
+        <div class="telemetry-grid">
+            <div class="telemetry-item">
+                <span class="telemetry-label">FRAME</span>
+                <span id="frame-val" class="telemetry-val">1 / 1</span>
+            </div>
+            <div class="telemetry-item">
+                <span class="telemetry-label">DIREÇÃO</span>
+                <span id="dir-val" class="telemetry-val">DIR →</span>
+            </div>
+            <div class="telemetry-item">
+                <span class="telemetry-label">FPS</span>
+                <span id="fps-val" class="telemetry-val">60</span>
+            </div>
+        </div>
+    </div>
+
+    <!-- HUD Superior Direito: Visualizador da Sequência de Imagens -->
+    <div id="hud-spritesheet" class="hud-panel">
+        <div class="sheet-header">
+            <span class="hud-title" style="margin:0;">Sequência (Ordem Alfabética)</span>
+            <button id="toggle-sheet-btn" class="btn-toggle">Ocultar</button>
+        </div>
+        <div id="sheet-preview-wrapper">
+            <canvas id="sheetPreviewCanvas"></canvas>
+            <div class="sheet-legend">
+                <span id="current-file-name">idle_01.png</span>
+                <span id="sheet-coords">[0, 0]</span>
+            </div>
+        </div>
+    </div>
+
+    <!-- Controles Touch Opcionais (Mobile/Tablet) -->
+    <div id="mobile-controls">
+        <div class="touch-pad">
+            <div></div>
+            <button class="touch-btn" data-key="KeyW">▲</button>
+            <div></div>
+            <button class="touch-btn" data-key="KeyA">◀</button>
+            <button class="touch-btn" data-key="KeyS">▼</button>
+            <button class="touch-btn" data-key="KeyD">▶</button>
+        </div>
+        <div class="touch-actions">
+            <button id="touch-shift" class="touch-action-btn" style="background: rgba(245, 158, 11, 0.75);">CORRER (Shift)</button>
+            <button id="touch-attack" class="touch-action-btn" style="background: rgba(244, 63, 94, 0.85);">ATACAR (Clique)</button>
+        </div>
+    </div>
+
+    <!-- HUD Inferior: Monitor de Teclado e Rato em Tempo Real -->
+    <div id="hud-inputs" class="hud-panel">
+        <div class="input-group">
+            <span class="input-group-label">Mover (WASD / Setas)</span>
+            <div class="wasd-grid">
+                <div></div>
+                <div id="key-up" class="key-cap">W<span class="sub">▲</span></div>
+                <div></div>
+                <div id="key-left" class="key-cap">A<span class="sub">◀</span></div>
+                <div id="key-down" class="key-cap">S<span class="sub">▼</span></div>
+                <div id="key-right" class="key-cap">D<span class="sub">▶</span></div>
+            </div>
+        </div>
+
+        <div class="divider-v"></div>
+
+        <div class="input-group">
+            <span class="input-group-label">Correr</span>
+            <div id="key-shift" class="key-cap shift-key">SHIFT</div>
+        </div>
+
+        <div class="divider-v"></div>
+
+        <div class="input-group">
+            <span class="input-group-label">Atacar</span>
+            <div id="mouse-visual" class="mouse-widget" title="Botão Esquerdo do Rato">
+                <div class="mouse-left"></div>
+                <div class="mouse-right"></div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script src="scripts/scripts.js"></script>
+</body>
+</html>
